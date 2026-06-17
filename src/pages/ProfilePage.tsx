@@ -12,19 +12,6 @@ function maskIc(ic: string) {
   return ic.slice(0, 6) + '-XX-' + ic.slice(-4)
 }
 
-function calcUmur(tarikhLahir: string): number {
-  if (!tarikhLahir) return 0
-  const today = new Date()
-  const dob = new Date(tarikhLahir)
-  let age = today.getFullYear() - dob.getFullYear()
-  if (
-    today.getMonth() < dob.getMonth() ||
-    (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())
-  )
-    age--
-  return age
-}
-
 function ageLabel(tarikhLahir: string): string {
   if (!tarikhLahir) return ''
   const dob = new Date(tarikhLahir)

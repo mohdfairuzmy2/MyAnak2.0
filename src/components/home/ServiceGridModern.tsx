@@ -93,6 +93,7 @@ export function ServiceGridModern({
           accent="teal"
           icon={<ImunisasiIcon />}
           label="Imunisasi"
+          subtitle={imunSubtitle}
           onClick={onImmunization}
         />
         <ServiceCard

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useImmunization } from '../../context/ImmunizationContext'
 import {
   formatDateMs,
@@ -13,17 +12,14 @@ export function VaccinationReminderCard() {
     nextVaccination,
     permission,
     completedAges,
-    updateProfile,
     markCompleted,
     toggleReminders,
-    requestNotificationPermission,
   } = useImmunization()
 
-  const [showForm, setShowForm] = useState(!profile.birthDate)
   const notificationsSupported = 'Notification' in window
   const progress = getImmunizationProgress(completedAges)
 
-  if (!birthDate || showForm) {
+  if (!birthDate) {
     return (
       <section className="info-section">
         <div className="reminder-setup">
@@ -34,43 +30,12 @@ export function VaccinationReminderCard() {
               </svg>
               <span className="reminder-setup__emoji">💉</span>
             </div>
-            <h2 className="reminder-setup__title">Bila anak anda dilahirkan?</h2>
+            <h2 className="reminder-setup__title">Belum ada maklumat anak</h2>
             <p className="reminder-setup__desc">
-              Kami akan kira jadual vaksin PIK dan hantar peringatan tepat pada masanya.
+              Tambah anak dan tarikh lahir di tab Profil. Kami akan kira jadual
+              vaksin PIK dan hantar peringatan tepat pada masanya.
             </p>
           </div>
-
-          <label className="reminder-field">
-            <span className="reminder-field__label">Nama anak (pilihan)</span>
-            <input
-              type="text"
-              className="reminder-field__input"
-              placeholder="Contoh: Aisyah"
-              value={profile.childName}
-              onChange={(e) => updateProfile({ childName: e.target.value })}
-            />
-          </label>
-
-          <label className="reminder-field">
-            <span className="reminder-field__label">Tarikh lahir</span>
-            <input
-              type="date"
-              className="reminder-field__input reminder-field__input--large"
-              value={profile.birthDate}
-              max={new Date().toISOString().slice(0, 10)}
-              onChange={(e) => updateProfile({ birthDate: e.target.value })}
-            />
-          </label>
-
-          {birthDate && (
-            <button
-              type="button"
-              className="reminder-next__done"
-              onClick={() => setShowForm(false)}
-            >
-              Lihat jadual saya
-            </button>
-          )}
         </div>
       </section>
     )
@@ -100,13 +65,6 @@ export function VaccinationReminderCard() {
             <p className="reminder-summary__stat">
               {progress.completed} / {progress.total} fasa selesai
             </p>
-            <button
-              type="button"
-              className="reminder-summary__edit"
-              onClick={() => setShowForm(true)}
-            >
-              Edit tarikh lahir
-            </button>
           </div>
         </div>
 
@@ -132,7 +90,7 @@ export function VaccinationReminderCard() {
           <button
             type="button"
             className="reminder-enable-btn"
-            onClick={() => void requestNotificationPermission()}
+            onClick={() => void toggleReminders(true)}
           >
             Benarkan notifikasi
           </button>

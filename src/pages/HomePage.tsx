@@ -12,6 +12,7 @@ interface HomePageProps {
   onBirthRegistration: () => void
   onImmunization: () => void
   onBantuan: () => void
+  onPerancangan: () => void
 }
 
 export function HomePage({
@@ -20,6 +21,7 @@ export function HomePage({
   onBirthRegistration,
   onImmunization,
   onBantuan,
+  onPerancangan,
 }: HomePageProps) {
   return (
     <>
@@ -46,6 +48,7 @@ export function HomePage({
               onBirthRegistration={onBirthRegistration}
               onImmunization={onImmunization}
               onBantuan={onBantuan}
+              onPerancangan={onPerancangan}
             />
             <FamilySummaryCard onViewAll={() => onTabChange('profile')} />
           </>

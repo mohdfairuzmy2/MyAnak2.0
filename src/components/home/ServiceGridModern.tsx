@@ -12,13 +12,12 @@ import { useUser } from '../../context/UserContext'
 import { formatDaysUntil } from '../../utils/vaccinationReminder'
 
 const MYKID_STATUS_URL = 'https://spcmykid.jpn.gov.my/semak_mykid/'
-const PERANCANGAN_URL =
-  'https://www.lppkn.gov.my/lppkngateway/frontend/web/index.php?r=portal/article-full&menu=81&id=U1kvczF0L09aY3Q1bkNDWld3cUsvUT09'
 
 interface ServiceGridModernProps {
   onBirthRegistration: () => void
   onImmunization: () => void
   onBantuan: () => void
+  onPerancangan: () => void
 }
 
 interface ServiceCardProps {
@@ -133,6 +132,7 @@ export function ServiceGridModern({
   onBirthRegistration,
   onImmunization,
   onBantuan,
+  onPerancangan,
 }: ServiceGridModernProps) {
   const { birthDate, nextVaccination } = useImmunization()
   const { family } = useUser()
@@ -179,7 +179,7 @@ export function ServiceGridModern({
           icon={<PerancanganAnakIcon />}
           label="Perancangan Anak"
           subtitle="LPPKN"
-          onClick={() => window.open(PERANCANGAN_URL, '_blank', 'noopener,noreferrer')}
+          onClick={onPerancangan}
         />
         <ServiceCard
           accent="slate"

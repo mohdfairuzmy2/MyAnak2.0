@@ -5,6 +5,7 @@ import { HomePage } from './pages/HomePage'
 import { BirthRegistrationFlow } from './pages/BirthRegistrationFlow'
 import { ImmunizationPage } from './pages/ImmunizationPage'
 import { BantuanPage } from './pages/BantuanPage'
+import { PerancanganPage } from './pages/PerancanganPage'
 import type { HomeTab } from './components/BottomNav'
 import './App.css'
 import './modern.css'
@@ -13,7 +14,7 @@ import './info-pages.css'
 import './profile.css'
 import './bantuan.css'
 
-type Page = 'home' | 'birth-registration' | 'immunization' | 'bantuan'
+type Page = 'home' | 'birth-registration' | 'immunization' | 'bantuan' | 'perancangan'
 
 function AppShell() {
   const [page, setPage] = useState<Page>('home')
@@ -46,6 +47,14 @@ function AppShell() {
     )
   }
 
+  if (page === 'perancangan') {
+    return (
+      <div className="app app--flow">
+        <PerancanganPage onBack={() => setPage('home')} />
+      </div>
+    )
+  }
+
   return (
     <div className="app">
       <HomePage
@@ -54,6 +63,7 @@ function AppShell() {
         onBirthRegistration={() => setPage('birth-registration')}
         onImmunization={() => setPage('immunization')}
         onBantuan={() => setPage('bantuan')}
+        onPerancangan={() => setPage('perancangan')}
       />
     </div>
   )

@@ -1,0 +1,293 @@
+.ban-page .info-page__content {
+  padding-bottom: 100px;
+}
+
+/* Summary strip */
+.ban-summary {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 18px;
+  padding: 14px 0;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(15,23,42,0.05);
+}
+.ban-summary__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.ban-summary__divider {
+  width: 1px;
+  height: 32px;
+  background: #f1f5f9;
+}
+.ban-summary__num {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.ban-summary__num--green { color: #16a34a; }
+.ban-summary__num--amber { color: #d97706; }
+.ban-summary__label {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+/* Disclaimer */
+.ban-disclaimer {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  padding: 0 2px;
+}
+
+/* List */
+.ban-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Card */
+.ban-card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 12px rgba(15,23,42,0.05);
+  overflow: hidden;
+}
+.ban-card--layak { border-left: 3px solid #16a34a; }
+.ban-card--semak { border-left: 3px solid #d97706; }
+.ban-card--tidak { border-left: 3px solid #cbd5e1; opacity: 0.7; }
+
+.ban-card__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px 10px;
+}
+.ban-card__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ban-card__body {
+  flex: 1;
+  min-width: 0;
+}
+.ban-card__name {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.3;
+  margin: 0 0 2px;
+}
+.ban-card__agensi {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin: 0;
+}
+.ban-card__badge {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.ban-card__amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px 8px;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+}
+.ban-card__amount-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+.ban-card__amount-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.ban-card__sebab {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  padding: 4px 14px 8px;
+  margin: 0;
+}
+
+.ban-card__footer {
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px 14px;
+}
+
+/* Buttons */
+.ban-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+.ban-btn--ghost {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+.ban-btn--primary {
+  flex: 1;
+  justify-content: center;
+  border: none;
+}
+
+/* Bottom sheet overlay */
+.ban-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.5);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+}
+
+.ban-sheet {
+  width: 100%;
+  max-width: var(--app-width);
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  max-height: 88dvh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 0px));
+}
+
+.ban-sheet__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.ban-sheet__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ban-sheet__header-text {
+  flex: 1;
+  min-width: 0;
+}
+.ban-sheet__name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 2px;
+  line-height: 1.3;
+}
+.ban-sheet__agensi {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin: 0;
+}
+.ban-sheet__close {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.ban-sheet__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+.ban-sheet__status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.ban-sheet__jumlah {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+.ban-sheet__perihal {
+  font-size: 0.8125rem;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.ban-sheet__rows {
+  background: #f8fafc;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.ban-sheet__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.8125rem;
+}
+.ban-sheet__row:last-child { border-bottom: none; }
+.ban-sheet__row--highlight { background: #fff; }
+.ban-sheet__row-label { color: #64748b; flex-shrink: 0; }
+.ban-sheet__row-val { text-align: right; color: var(--color-primary); font-weight: 500; }
+
+.ban-sheet__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid #f1f5f9;
+}
+.ban-sheet__portal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  color: #fff;
+  border: none;
+}
+.ban-sheet__footer .btn--secondary {
+  text-align: center;
+  padding: 12px;
+  border-radius: 14px;
+}

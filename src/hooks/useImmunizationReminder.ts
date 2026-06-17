@@ -44,20 +44,21 @@ async function showVaccinationNotification(
       : next.daysUntil > 0
         ? `${formatDateMs(next.dueDate)} — ${vaccines}`
         : `Lewat ${Math.abs(next.daysUntil)} hari — ${next.entry.ageLabel}`
+  const iconUrl = `${import.meta.env.BASE_URL}favicon.svg`
   const registration = await navigator.serviceWorker?.ready
   if (registration) {
     await registration.showNotification('Peringatan Imunisasi MyAnak', {
       body: `${name}: ${body}`,
-      icon: '/favicon.svg',
-      badge: '/favicon.svg',
+      icon: iconUrl,
+      badge: iconUrl,
       tag: `vaccine-${next.entry.age}-${childName}`,
-      data: { url: '/' },
+      data: { url: import.meta.env.BASE_URL },
     })
     return
   }
   new Notification('Peringatan Imunisasi MyAnak', {
     body: `${name}: ${body}`,
-    icon: '/favicon.svg',
+    icon: iconUrl,
     tag: `vaccine-${next.entry.age}-${childName}`,
   })
 }

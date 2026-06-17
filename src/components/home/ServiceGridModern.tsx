@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import {
   PendaftaranAnakIcon,
   StatusMyKidIcon,
@@ -8,7 +8,12 @@ import {
   MoreIcon,
 } from '../ServiceIcons'
 import { useImmunization } from '../../context/ImmunizationContext'
+import { useUser } from '../../context/UserContext'
 import { formatDaysUntil } from '../../utils/vaccinationReminder'
+
+const MYKID_STATUS_URL = 'https://spcmykid.jpn.gov.my/semak_mykid/'
+const PERANCANGAN_URL =
+  'https://www.lppkn.gov.my/lppkngateway/frontend/web/index.php?r=portal/article-full&menu=81&id=U1kvczF0L09aY3Q1bkNDWld3cUsvUT09'
 
 interface ServiceGridModernProps {
   onBirthRegistration: () => void
@@ -56,14 +61,85 @@ function ServiceCard({
   )
 }
 
+function MyKidCheckSheet({
+  defaultNumber,
+  onClose,
+}: {
+  defaultNumber: string
+  onClose: () => void
+}) {
+  const [num, setNum] = useState(defaultNumber)
+  const cleaned = num.replace(/\D/g, '')
+
+  async function handleSubmit() {
+    if (cleaned) {
+      try {
+        await navigator.clipboard.writeText(cleaned)
+      } catch {
+        /* clipboard unavailable — continue to portal */
+      }
+    }
+    window.open(MYKID_STATUS_URL, '_blank', 'noopener,noreferrer')
+    onClose()
+  }
+
+  return (
+    <div className="prof-sheet-overlay" onClick={onClose}>
+      <div className="prof-sheet" onClick={(e) => e.stopPropagation()}>
+        <div className="prof-sheet__header">
+          <span className="prof-sheet__title">Semak Status MyKid</span>
+          <button type="button" className="prof-sheet__close" onClick={onClose} aria-label="Tutup">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="20" height="20">
+              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="prof-sheet__body">
+          <p className="prof-empty">
+            Masukkan nombor MyKid anak, kemudian semak status permohonan di portal rasmi JPN.
+          </p>
+          <label className="prof-field">
+            <span>Nombor MyKid</span>
+            <input
+              className="form-input"
+              inputMode="numeric"
+              placeholder="Contoh: 240101140123"
+              maxLength={14}
+              value={num}
+              onChange={(e) => setNum(e.target.value)}
+            />
+          </label>
+          <p className="prof-empty">
+            Anda akan dibawa ke laman rasmi JPN (spcmykid.jpn.gov.my)
+            {cleaned ? '. Nombor akan disalin automatik untuk memudahkan tampal.' : '.'}
+          </p>
+        </div>
+
+        <div className="prof-sheet__footer">
+          <button type="button" className="btn btn--secondary" onClick={onClose}>
+            Batal
+          </button>
+          <button type="button" className="btn btn--primary" onClick={handleSubmit}>
+            Semak di Portal JPN
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function ServiceGridModern({
   onBirthRegistration,
   onImmunization,
   onBantuan,
 }: ServiceGridModernProps) {
   const { birthDate, nextVaccination } = useImmunization()
+  const { family } = useUser()
+  const [showMyKid, setShowMyKid] = useState(false)
 
   const imunSubtitle = birthDate && nextVaccination ? formatDaysUntil(nextVaccination.daysUntil) : 'Jadual PIK'
+  const defaultMyKid = family.senaraAnak[0]?.noKad ?? ''
 
   return (
     <section className="home-section" aria-label="Perkhidmatan utama">
@@ -82,6 +158,8 @@ export function ServiceGridModern({
           accent="blue"
           icon={<StatusMyKidIcon />}
           label="Status MyKid"
+          subtitle="Semak di JPN"
+          onClick={() => setShowMyKid(true)}
         />
         <ServiceCard
           accent="peach"
@@ -100,6 +178,8 @@ export function ServiceGridModern({
           accent="violet"
           icon={<PerancanganAnakIcon />}
           label="Perancangan Anak"
+          subtitle="LPPKN"
+          onClick={() => window.open(PERANCANGAN_URL, '_blank', 'noopener,noreferrer')}
         />
         <ServiceCard
           accent="slate"
@@ -107,6 +187,10 @@ export function ServiceGridModern({
           label="Lagi"
         />
       </div>
+
+      {showMyKid && (
+        <MyKidCheckSheet defaultNumber={defaultMyKid} onClose={() => setShowMyKid(false)} />
+      )}
     </section>
   )
 }
